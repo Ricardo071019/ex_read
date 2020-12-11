@@ -4,7 +4,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	$titulo="";
 	$sinopse="";
 	$idioma ="";
-	$data_lançamento="";
+	$data_lancamento="";
 	$quantidade=0;
 
 	if(isset($_POST['titulo'])){
@@ -22,8 +22,8 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 	if(isset($_POST ['idioma'])){
 		$idioma = $_POST['idioma'];
 	}
-	if(isset($_POST['data_lançamento'])){
-		$data_lançamento = $_POST['data_lançamento'];
+	if(isset($_POST['data_lancamento'])){
+		$data_lancamento = $_POST['data_lancamento'];
 	}
 	$con = new mysqli("localhost","root","","filmes");
 	if($con->connect_errno!=0){
@@ -31,13 +31,14 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 		exit;
 	}
 	else {
-		$sql = 'insert into filmes(titulo,sinopse,idioma,quantidade,data_lançamento) values (?,?,?,?,?)';
-		$stm = $con->prepare ($sql);
+		$sql = 'insert into filmes(titulo,sinopse,idioma,quantidade,data_lancamento) values (?,?,?,?,?)';
+		$stm = $con->prepare ( $sql);
 		if($stm!=false){
-			$stm->bind_param('sssis',$titulo,$sinopse,$idioma,$quantidade,$data_lançamento);
+			$stm->bind_param('sssis',$titulo,$sinopse,$idioma,$quantidade,$data_lancamento);
+			$stm->execute();
 			$stm->close();
 
-			echo '<script>alert("livo aduicionado com sucesso");</script';
+			echo '<script>alert("livro aduicionado com sucesso");</script>';
 			echo "Aguarde um momento.A reencaminhar página";
 			header("refresh:5;url=index.php");
 
@@ -48,10 +49,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 			header("refresh:5;url=index.php");
 		}
 
-	}
+	}//end if -if($con->connect_errno!=0)
 
-}
-else{
+}//if($_SERVER['REQUEST_METHOD']=="POST")
+else{//else if($SERVER['REQUEST_METHOD']=="POST")
 	?>
 	<!DOCTYPE html>
 	<html>
