@@ -27,7 +27,11 @@ else{
 		}
 		$stm->close();
 		?>
+		<br>
+		<br>
 
+
+		<a href="filmes_create.php"><button type="button" class="btn btn-success">Faz um novo registo</button></a>
 		<br>
 		<body>
 		<html>
