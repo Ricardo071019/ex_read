@@ -1,14 +1,14 @@
 <?php
 if($_SERVER['REQUEST_METHOD']=="GET"){
 
-	if(!isset($_GET['filme'])|| !is_numeric($_GET['filme'])){
+	if(!isset($_GET['atores'])|| !is_numeric($_GET['atores'])){
 		echo '<script>alert("Erro ao abrir livro");</script>';
 		echo 'Aguarde um momento.A reencaminhar página';
 		header("refresh:5; url=index.php");
 		exit();
 
      }
-		     $idFilme=$_GET['filme'];
+		     $idAtores=$_GET['filme'];
 		     $con= new mysqli("localhost","root","","filmes");
 
 		     if($con->connect_errno!=0){

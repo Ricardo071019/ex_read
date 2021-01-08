@@ -29,14 +29,16 @@ else{
 		?>
 		<br>
 		<br>
+		<a href="filmes_create.php"><button type="button" class="btn btn-success">Faz um novo registo</button></a>
+		<br>
 		<h1>Lista de Atores</h1>
 		<?php
 		$stm = $con->prepare('select * from atores');
 		$stm->execute();
 		$res=$stm->get_result();
 		while($resultado = $res->fetch_assoc()){
-			echo '<a href="atores_show.php?filme='.$resultado['id_ator'].'">';
-			echo $resultado['titulo'];
+			echo '<a href="atores_show.php?filme='.$resultado['id_atores'].'">';
+			echo $resultado['nome'];
 			echo '</a>';
 			echo '<br>';
 		}
@@ -44,10 +46,10 @@ else{
 		?>
 		<br>
 		<br>
-
-
-		<a href="filmes_create.php"><button type="button" class="btn btn-success">Faz um novo registo</button></a>
+		<a href="atores_create.php"><button type="button" class="btn btn-success">Faz um novo registo</button></a>
 		<br>
+
+		
 		<body>
 		<html>
 
