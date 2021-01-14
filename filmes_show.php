@@ -1,5 +1,10 @@
 <?php
-if($_SERVER['REQUEST_METHOD']=="GET"){
+session_start();
+if(!isset($_SESSION['login'])){
+	$_SESSION['login']="incorreto";
+}
+if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
+	if($_SERVER['REQUEST_METHOD']=="GET"){
 
 	if(!isset($_GET['filme'])|| !is_numeric($_GET['filme'])){
 		echo '<script>alert("Erro ao abrir livro");</script>';
@@ -46,7 +51,7 @@ if($_SERVER['REQUEST_METHOD']=="GET"){
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Detalhes</title>
-</head>+
+</head>
 <body>
 	<h1>Detalhes do filme</h1>
 	<?php
@@ -69,6 +74,14 @@ if($_SERVER['REQUEST_METHOD']=="GET"){
 		?>
 	</body>
 	</html>
+	<?php
+}
+else{
+	echo 'Para entrar nesta pagina necessita de efetuar<a href="login.php">login</a>';
+	header('refresh:2;url=login.php');
+	
+}
+?>
 
-</body>
-</html>
+
+

@@ -11,22 +11,21 @@ if($con->connect_errno!=0){
 }
 else{
 	?>
-
-	<!DOCTYPE html>
+<!DOCTYPE html>
 	<html>
 	<head>
 	<meta charset="ISO-8859-1">
-		<title>filmes</title>
+		<title>Atores</title>
 	</head>
 	<body style="background-color:#f0f0ff ">
-		<h1>Lista de filmes</h1>
+	<h1>Lista de Atores</h1>
 		<?php
-		$stm = $con->prepare('select * from filmes');
+		$stm = $con->prepare('select * from atores');
 		$stm->execute();
 		$res=$stm->get_result();
 		while($resultado = $res->fetch_assoc()){
-			echo '<a href="filmes_show.php?filme='.$resultado['id_filme'].'">';
-			echo $resultado['titulo'];
+			echo '<a href="atores_show.php?ator='.$resultado['id_ator'].'">';
+			echo $resultado['nome'];
 			echo '</a>';
 			echo '<br>';
 		}
@@ -34,17 +33,16 @@ else{
 		?>
 		<br>
 		<br>
-		<a href="filmes_create.php"><button type="button" class="btn btn-success">Faz um novo registo</button></a>
+		<a href="atores_create.php"><button type="button" class="btn btn-success">Faz um novo registo</button></a>
 		<br>
 		<a href="processa_logout.php">Sair</a>
-		
 
 		<?php
 	}//end if - if($con->connect_errno!=0)
 	?>
-	
-	</body>
-	</html>
+		
+<body>
+<html>
 <?php
 }
 else{

@@ -1,53 +1,59 @@
 <?php
+session_start();
+if(!isset($_SESSION['login'])){
+	$_SESSION['login']="incorreto";
+}
+if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
+	if($_SERVER['REQUEST_METHOD']=="GET"){
+	if(isset($_GET['ator'])&& is_numeric($_GET['ator'])){
+	$idFilme=$_GET['ator'];
+	$con = new mysqli ("localhost","root","","filmes");
 
-if($_SERVER['REQUEST_METHOD']='POST'){
-$nome="";
-$nacionalidade="";
-$data_nascimento ="";
-$quantidade=0;
+	if($con->connect_errno!=0){
+	echo "<h1>Ocorreu um erro no acesso à base de dados. <br>".$con->connect_error."</h1>";
+	exit();
+	}
+	$sql="Select * from atores where id_ator=?";
+	$stm=$con->prepare($sql);
+	if($stm!=false){
+	$stm->bind_param("i",$idAtor);
+	$stm-> execute();
 
-
-if(isset($_POST['nome'])){
-		$nome = $_POST['nome'];
+	$res=$stm->get_result();
+	$livro=$res->fetch_assoc();
+	$stm->close();
+	}
+	?>
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<meta charset="ISO_8859-1">
+	<title>Editar Ator</title>
+	</head>
+	<body>
+	<h1>Editar Atores</h1>
+	<form action="filmes_update.php"method="post">
+	<label>Nome</label><input type="text" name="nome" required value="<?php echo $nome['nome'];?>"><br>
+	<label>Nacionalidade</label><input type="text" name="nacionalidade" required value="<?php echo $nacionalidade['nacionalidade'];?>"><br>
+	<label>Data_Nascimento</label><input type="text" name="data_nascimento" required value="<?php echo $data_nascimento['data_nascimento'];?>"><br>
+	<input type="hidden" name="id_ator" required value="<?php echo $ator['id_ator'];?>">
+	<input type="submit" name="enviar"><br>
+	</form>
+	</body>
+	<?php
 	}
 	else{
-		echo '<scipt>alert("É obrigatorio o preenchimento do nome.");</script>';
+	echo ('<h1>Houve um erro ao processar o seu pedido.<br>Dentro de segundos será reencaminhado!</h1>');
+	header("refresh:5,url=index_atores.php");
 	}
-	if(isset($_POST['nacionalidade'])){
-		$nacionalidade = $_POST['nacionalidade'];
 	}
-		if(isset($_POST['data_nascimento'])){
-		$data_nascimento = $_POST['data_nascimento'];
-	}
-	$con = new mysqli("localhost","root","","atores");
-	if($con->connect_errno!=0){
-		echo "Ocorreu um erro no acesso á base de dados.<br>".$con->connect_error;
-		exit;
-	}
-else {
-		$sql = 'insert into atores(nome,nacionalidade,data_nascimento) values (?,?,?,?,?)';
-		$stm = $con->prepare ( $sql);
-		if($stm!=false){
-			$stm->bind_param('sssis',$nome,$nacionalidade,$data_nascimento);
-			$stm->execute();
-			$stm->close();
 
-			echo '<script>alert("Atore aduicionado com sucesso");</script>';
-			echo "Aguarde um momento.A reencaminhar página";
-			header("refresh:5;url=index.php");
 
-		}
-		else{
-			echo ($con->error);
-			echo  "Aguarde um momento.A reencaminhar página";
-			header("refresh:5;url=index.php");
-		}
-
-else{
-}
-}
 }
 else{
-echo "<h1>Houve um erro ao processar o seu pedido!<br>Irá ser reencaminhado!</h1>";
-header ("refresh:5;url=index.php");
+	echo 'Para entrar nesta pagina necessita de efetuar<a href="login.php">login</a>';
+	header('refresh:2;url=login.php');
+	
 }
+
+

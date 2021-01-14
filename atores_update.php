@@ -1,30 +1,22 @@
 <?php
 
 if($_SERVER['REQUEST_METHOD']='POST'){
-$titulo="";
-$sinopse="";
-$quantidade=0;
-$data_lancamento="";
-$idioma="";
+$nome="";
+$nacionalidade="";
+$data_nascimento="";
 
-if(isset($_POST['titulo'])){
-$titulo=$_POST['titulo'];
+
+if(isset($_POST['nome'])){
+$nome=$_POST['nome'];
 }
 else{
-echo '<script>alert("É obrigatorio o preenchimento do titulo.");</script>';
+echo '<script>alert("É obrigatorio o preenchimento do nome.");</script>';
 }
-if(isset($_POST['sinopse'])){
-$sinopse = $_POST['sinopse'];
+if(isset($_POST['nacionalidade'])){
+$nacionalidade = $_POST['nacionalidade'];
 }
-if(isset($_POST['quantidade'])&& is_numeric($_POST['quantidade'])){
-$quantidade= $_POST['quantidade'];
-
-}
-if (isset($_POST['idioma'])) {
-$idioma=$_POST['idioma'];
-}
-if(isset($_POST['data_lancamento'])) {
-$data_lancamento = $_POST['data_lancamento'];
+if (isset($_POST['data_nascimento'])) {
+$data_nascimento=$_POST['data_nascimento'];
 }
 $con = new mysqli("localhost","root","","filmes");
 
@@ -33,18 +25,18 @@ echo "Ocorreu um erro no acesso à base de dados.<br>". $con->connect_error;
 exit;
 }
 else{
-$sql="insert into filmes(titulo, sinopse,idioma,data_lancamento,quantidade)values(?,?,?,?,?);";
+$sql="insert into atores(nome, nacionalidade,data_nascimento)values(?,?,?);";
 $stm = $con->prepare ($sql);
 
 if($stm!=false){
-$stm->bind_param("ssssi",$titulo,$sinopse,$idioma,$data_lancamento,$quantidade);
+$stm->bind_param("sss",$nome,$nacionalidade,$data_nascimento);
 $stm->execute();
 $stm->execute();
 $stm->close();
 
-echo '<script>alert("Filme alterado com sucesso!!");</script>';
+echo '<script>alert("Ator alterado com sucesso!!");</script>';
 echo "Aguarde um momento.A reencaminhar página";
-header('refresh:5;url=index.php');
+header('refresh:5;url=index_atores.php');
 
 }
 else{
@@ -53,5 +45,5 @@ else{
 }
 else{
 echo "<h1>Houve um erro ao processar o seu pedido!<br>Irá ser reencaminhado!</h1>";
-header ("refresh:5;url=index.php");
+header ("refresh:5;url=index_atores.php");
 }

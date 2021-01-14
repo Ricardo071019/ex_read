@@ -1,14 +1,14 @@
 <?php
 if($_SERVER['REQUEST_METHOD']=="GET"){
 
-	if(!isset($_GET['atores'])|| !is_numeric($_GET['atores'])){
-		echo '<script>alert("Erro ao abrir livro");</script>';
+	if(!isset($_GET['ator'])|| !is_numeric($_GET['ator'])){
+		echo '<script>alert("Erro ao abrir atores");</script>';
 		echo 'Aguarde um momento.A reencaminhar página';
-		header("refresh:5; url=index.php");
+		header("refresh:5; url=index_atores.php");
 		exit();
 
      }
-		     $idAtores=$_GET['filme'];
+		     $idAtores=$_GET['ator'];
 		     $con= new mysqli("localhost","root","","filmes");
 
 		     if($con->connect_errno!=0){
@@ -16,22 +16,22 @@ if($_SERVER['REQUEST_METHOD']=="GET"){
 		     	exit;
 		     }
 		     else{
-		     	$sql='select * from filmes where id_filme = ?';
+		     	$sql='select * from atores where id_ator = ?';
 		     	$stm = $con->prepare($sql);
 		     	if($stm!=false){
-		     		$stm->bind_param('i', $idFilme);
+		     		$stm->bind_param('i', $idAtores);
 		     		$stm->execute();
 		     		$res=$stm->get_result();
-		     		$livro = $res->fetch_assoc();
+		     		$ator = $res->fetch_assoc();
 		     		$stm->close();
 		     	}
 		     	else{
 		     		echo '<br>';
-		     		echo ($con -> error);
+		     		echo ($con ->error);
 		     		echo '<br>';
 		     		echo "Aguarde um momento.A reencaminhar página";
 		     		echo '<br>';
-		     		header("refresh:5; url=index.php");
+		     		header("refresh:5; url=index_atores.php");
 
 
 		     	}
@@ -48,23 +48,19 @@ if($_SERVER['REQUEST_METHOD']=="GET"){
 	<title>Detalhes</title>
 </head>+
 <body>
-	<h1>Detalhes do filme</h1>
+	<h1>Detalhes do Ator</h1>
 	<?php
-		if(isset($livro)){
+		if(isset($ator)){
 			echo '<br>';
-			echo $livro['titulo'];
+			echo $ator['nome'];
 			echo '<br>';
-			echo utf8_encode($livro['sinopse']) ;
+			echo $ator['nacionalidade'];
 			echo '<br>';
-			echo $livro['idioma'];
-			echo '<br>';
-			echo $livro['data_lancamento'];
-			echo '<br>';
-			echo $livro['quantidade'];
+			echo $ator['data_nascimento'];
 			echo '<br>';
 		}
 		else{
-			echo '<h2>Parece que o filme selecionado nao existe.<br>Confirme a sua seleçao.</h2>';
+			echo '<h2>Parece que o Ator selecionado nao existe.<br>Confirme a sua seleçao.</h2>';
 		}
 		?>
 	</body>
