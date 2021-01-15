@@ -20,7 +20,7 @@ if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
 	$stm-> execute();
 
 	$res=$stm->get_result();
-	$livro=$res->fetch_assoc();
+	$ator=$res->fetch_assoc();
 	$stm->close();
 	}
 	?>
@@ -32,10 +32,10 @@ if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
 	</head>
 	<body>
 	<h1>Editar Atores</h1>
-	<form action="filmes_update.php"method="post">
-	<label>Nome</label><input type="text" name="nome" required value="<?php echo $nome['nome'];?>"><br>
-	<label>Nacionalidade</label><input type="text" name="nacionalidade" required value="<?php echo $nacionalidade['nacionalidade'];?>"><br>
-	<label>Data_Nascimento</label><input type="text" name="data_nascimento" required value="<?php echo $data_nascimento['data_nascimento'];?>"><br>
+	<form action="atores_update.php"method="post">
+	<label>Nome</label><input type="text" name="nome" required value="<?php echo $ator['nome'];?>"><br>
+	<label>Nacionalidade</label><input type="text" name="nacionalidade" required value="<?php echo $ator['nacionalidade'];?>"><br>
+	<label>Data_Nascimento</label><input type="text" name="data_nascimento" required value="<?php echo $ator['data_nascimento'];?>"><br>
 	<input type="hidden" name="id_ator" required value="<?php echo $ator['id_ator'];?>">
 	<input type="submit" name="enviar"><br>
 	</form>

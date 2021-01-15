@@ -29,11 +29,11 @@ echo "Ocorreu um erro no acesso à base de dados.<br>". $con->connect_error;
 exit;
 }
 else{
-$sql="insert into atores(nome, nacionalidade,data_nascimento)values(?,?,?);";
+$sql="update atores set nome=?,data_nascimento=?, nacionalidade=? where id_ator=?";
 $stm = $con->prepare ($sql);
 
 if($stm!=false){
-$stm->bind_param("sss",$nome,$nacionalidade,$data_nascimento);
+$stm->bind_param('sssi', $nome,$data_nascimento,$nacionalidade,$id_ator);
 $stm->execute();
 $stm->execute();
 $stm->close();

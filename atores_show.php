@@ -68,13 +68,16 @@ if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
 			echo '<h2>Parece que o Ator selecionado nao existe.<br>Confirme a sua seleçao.</h2>';
 		}
 		?>
+		<a href="atores_edit.php?ator=1">Editar</a><br>
+		<br>
+		<a href="atores_delete.php?ator=1">Eliminar</a>
 	</body>
 	</html>
 
 </body>
 </html>
-}
 <?php
+}
 else
 {
 	echo 'Para entrar nesta pagina necessita de efetuar<a href="login.php">login</a>';
