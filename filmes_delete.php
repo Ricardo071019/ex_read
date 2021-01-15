@@ -18,7 +18,7 @@ if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
 			$sql = "delete from filmes where id_filme=?";
 			$stm = $con->prepare($sql);
 			if($stm!=false){
-				$stm->bind_param("i",$id_Filme);
+				$stm->bind_param("i",$idFilme);
 				$stm->execute();
 				$stm->close();
 				echo '<script>alert("Livro eliminado com sucesso");</script>';

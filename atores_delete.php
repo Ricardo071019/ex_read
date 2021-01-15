@@ -18,7 +18,7 @@ if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
 			$sql = "delete from atores where id_ator=?";
 			$stm = $con->prepare($sql);
 			if($stm!=false){
-				$stm->bind_param("i",$id_ator);
+				$stm->bind_param("i",$idAtor);
 				$stm->execute();
 				$stm->close();
 				echo '<script>alert("Ator eliminado com sucesso");</script>';

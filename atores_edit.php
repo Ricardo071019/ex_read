@@ -6,7 +6,7 @@ if(!isset($_SESSION['login'])){
 if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
 	if($_SERVER['REQUEST_METHOD']=="GET"){
 	if(isset($_GET['ator'])&& is_numeric($_GET['ator'])){
-	$idFilme=$_GET['ator'];
+	$idAtor=$_GET['ator'];
 	$con = new mysqli ("localhost","root","","filmes");
 
 	if($con->connect_errno!=0){
