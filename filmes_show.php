@@ -72,6 +72,9 @@ if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
 			echo '<h2>Parece que o filme selecionado nao existe.<br>Confirme a sua seleçao.</h2>';
 		}
 		?>
+		<a href="filmes_edit.php?filme=1">Editar</a><br>
+		<br>
+		<a href="filmes_delete.php?filme=1">Eliminar</a>
 	</body>
 	</html>
 	<?php

@@ -7,7 +7,7 @@ if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
 	if($_SERVER['REQUEST_METHOD']=='GET'){
 	if(isset($_GET['filme'])&& is_numeric($_GET['filme'])){
 		$idFilme = $_GET['filme'];
-		$con = new mysqli("localhost","root","","filme");
+		$con = new mysqli("localhost","root","","filmes");
 
 		if ($con->connect_errno!=0){
 			echo "Ocorreu um erro no acesso a base de dados.<br>".$con->connect_error;

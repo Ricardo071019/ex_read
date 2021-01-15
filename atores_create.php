@@ -1,6 +1,10 @@
 <?php
-
-if($_SERVER['REQUEST_METHOD']=="POST"){
+session_start();
+if(!isset($_SESSION['login'])){
+	$_SESSION['login']="incorreto";
+}
+if($_SESSION['login']=="correto" && isset($_SESSION['login'])){
+	if($_SERVER['REQUEST_METHOD']=="POST"){
 	$nome="";
 	$nacionalidade="";
 	$data_nascimento ="";
@@ -31,7 +35,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 			$stm->execute();
 			$stm->close();
 
-			echo '<script>alert("Atore aduicionado com sucesso");</script>';
+			echo '<script>alert("Ator adicionado com sucesso");</script>';
 			echo "Aguarde um momento.A reencaminhar página";
 			header("refresh:5;url=index.php");
 
@@ -70,3 +74,11 @@ else{//else if($SERVER['REQUEST_METHOD']=="POST")
 ?>
 
 
+}
+<?php
+else{
+	echo 'Para entrar nesta pagina necessita de efetuar<a href="login.php">login</a>';
+	header('refresh:2;url=login.php');
+	
+}
+?>

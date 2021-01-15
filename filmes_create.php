@@ -43,7 +43,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 			$stm->execute();
 			$stm->close();
 
-			echo '<script>alert("livro aduicionado com sucesso");</script>';
+			echo '<script>alert("livro adicionado com sucesso");</script>';
 			echo "Aguarde um momento.A reencaminhar página";
 			header("refresh:5;url=index.php");
 
